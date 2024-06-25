@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 import Header from './Components/Header'
 import Normalize from './Components/Normalize'
+import Banner from './Components/Banner/Banner'
 
 const Fondo = styled.div`
   background-color: #262626;
@@ -20,7 +21,7 @@ function App() {
       <Fondo>
         <Normalize/>
         <Header></Header>
-        
+        <Banner></Banner>
       </Fondo>
     </>
   )
