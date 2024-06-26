@@ -20,8 +20,8 @@ function App() {
     <>
       <Fondo>
         <Normalize/>
-        <Header></Header>
-        <Banner></Banner>
+        <Header/>
+        <Banner/>
       </Fondo>
     </>
   )
