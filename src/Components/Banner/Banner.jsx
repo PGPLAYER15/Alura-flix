@@ -59,7 +59,9 @@ const Banner = ()=>{
         }
 
         p{
-            text-align: justify
+            text-align: justify;
+            font-size:23px ;
+
         }
     `
 
