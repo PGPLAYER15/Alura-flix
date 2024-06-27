@@ -19,9 +19,9 @@ const Home = ()=> {
                 <Header/>
                 <Banner/>
                 <Categoria
-                        key={category.id}
-                        datos={category}
-                        cards={videos.filter(card => card.category === category.name)}
+                        key={Categoria.id}
+                        datos={Categoria}
+                        cards={videos.filter(card => card.Categoria === Categoria.name)}
                         onCardClick={handleCardClick}
                         onCardDelete={handleCardDelete}
                         onCardEdit={handleCardEdit}
