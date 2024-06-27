@@ -1,5 +1,8 @@
 import styled from "styled-components"
 
+import { useNavigate } from 'react-router-dom';
+
+
 const HeaderStyle = styled.header`
     display: flex;
     padding: 30px 30px;
@@ -36,12 +39,24 @@ const BtnContainer = styled.div`
 `
 
 const Header = () =>{
+
+    const navigate = useNavigate();
+
+    const cambiarPaginaVideo = () => {
+        navigate('/formulario');  // Asegúrate de que esta ruta coincida con la que definiste en App.jsx
+    }
+
+    const irAHome = () => {
+        navigate('/');
+    }
+
+
     return(
         <HeaderStyle>
             <img src="./img/LogoMain.svg" alt="Logo Main" />
             <BtnContainer>
-                <BtnInicioNuevoVideo> Home </BtnInicioNuevoVideo>
-                <BtnInicioNuevoVideo> Nuevo video </BtnInicioNuevoVideo>
+                <BtnInicioNuevoVideo onClick={()=>{irAHome()}}> Home </BtnInicioNuevoVideo>
+                <BtnInicioNuevoVideo onClick={()=>{cambiarPaginaVideo()}}> Nuevo video </BtnInicioNuevoVideo>
             </BtnContainer>
             
         </HeaderStyle>
