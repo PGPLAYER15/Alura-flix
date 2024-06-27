@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Card from '../card/card';
-/* import Notification from '../notification/Notification';
-import ConfirmationDialog from '../confirmationDialog/ConfirmationDialog'; */
+import Card from '../card/card'
+import Notification from './Notification';
+import ConfirmationDialog from './ConfirmDialog';
 
 const CategorySection = styled.section`
     width: 100%;
@@ -92,6 +92,8 @@ const Category = ({ datos, cards, onCardClick, onCardDelete, onCardEdit }) => {
         setShowConfirmation(false);
         setCardToDelete(null);
     };
+
+    Card
 
     return (
         <>

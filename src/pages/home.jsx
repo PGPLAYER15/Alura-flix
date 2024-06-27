@@ -18,7 +18,14 @@ const Home = ()=> {
             <Fondo>
                 <Header/>
                 <Banner/>
-                <Categoria/>
+                <Categoria
+                        key={category.id}
+                        datos={category}
+                        cards={videos.filter(card => card.category === category.name)}
+                        onCardClick={handleCardClick}
+                        onCardDelete={handleCardDelete}
+                        onCardEdit={handleCardEdit}
+                    />
             </Fondo>
     </>
        
