@@ -43,7 +43,7 @@ const Header = () =>{
     const navigate = useNavigate();
 
     const cambiarPaginaVideo = () => {
-        navigate('/formulario');  // Asegúrate de que esta ruta coincida con la que definiste en App.jsx
+        navigate('/Formulario');  // Asegúrate de que esta ruta coincida con la que definiste en App.jsx
     }
 
     const irAHome = () => {

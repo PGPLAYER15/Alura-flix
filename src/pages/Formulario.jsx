@@ -1,17 +1,23 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Normalize from "../Components/Normalize";
 import Banner from "../Components/Banner/Banner";
+import Header from "../Components/Header";
 
 const FondoColor = styled.div`
     background-color: #040910;
     width: 100%;
     min-height: 100vh;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    
+`
+
+const ContainerForm = styled.div`
+    width:100%;
+    background-color: #262626;
+    width: 100%;
+    min-height: 100vh;
+    box-shadow:inset 0 10px 11px -4px #2271D1 ;
+    
 `
 
 const Formulario = () => {
@@ -20,11 +26,15 @@ const Formulario = () => {
     }, []);
 
     return (
-        <Normalize>
-            <FondoColor>
-                <Banner></Banner>
-            </FondoColor>
-        </Normalize>
+        <>
+            <Normalize/>
+                <FondoColor>
+                    <Header/>
+                    <ContainerForm/>
+                </FondoColor>
+        </>
+        
+       
     )
 }
 

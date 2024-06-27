@@ -2,6 +2,7 @@ import Header from '../Components/Header';
 import styled from 'styled-components';
 import Normalize from '../Components/Normalize';
 import Banner from '../Components/Banner/Banner';
+import Categoria from '../Components/Categorias/categoria';
 
 
 const Fondo = styled.div`
@@ -17,6 +18,7 @@ const Home = ()=> {
             <Fondo>
                 <Header/>
                 <Banner/>
+                <Categoria/>
             </Fondo>
     </>
        
