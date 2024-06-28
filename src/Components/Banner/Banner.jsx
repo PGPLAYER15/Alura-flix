@@ -1,12 +1,10 @@
 import styled from "styled-components"
 import BannerFondo from "../../../public/img/BannerFondo.svg"
 
-const Banner = ()=>{
-
-    const BannerContainer = styled.div`
+const BannerContainer = styled.div`
         position:relative;
         width:100%;
-        height:90vh;
+        height:839px;
     `
 
     const BannerImg = styled.div`
@@ -76,6 +74,10 @@ const Banner = ()=>{
         border-radius: 17px;
         width:100%;
     `
+
+const Banner = ()=>{
+
+    
 
     return(
         <BannerContainer> 
