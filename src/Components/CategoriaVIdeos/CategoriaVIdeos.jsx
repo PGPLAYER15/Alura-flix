@@ -1,10 +1,14 @@
 import styled from "styled-components"
+import { MdDeleteForever ,MdEdit} from "react-icons/md";
 
 const ContainerCategorias = styled.div`
     display: flex;
     flex-direction: column;
     width: 96%;
-    padding: 20px 0px 0px 50px;
+    height: fit-content; 
+    padding: 20px 0px 20px 50px;
+    min-height: min-content; 
+    
 `;
 
 const TituloCategoria = styled.h2`
@@ -28,12 +32,19 @@ const VideosContainer = styled.div`
     margin-top: 20px;
 `;
 
+const ContenedorEditVideo = styled.div`
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items:center;
+`
+
 const VideoItem = styled.div`
     width: 430px;
     height: 319px;
     background-color: #444;
     border-radius: 14px;
-    box-shadow:inset 0 8px 10px -4px ${props => props.color || '#000000'} ;
+    color:white;
     border:4px solid ${props => props.color || '#000000'};
 
     img{
@@ -41,7 +52,7 @@ const VideoItem = styled.div`
         height: 260.85px;
         border-radius: 12px 12px 0 0;
         border-bottom:  4px solid ${props => props.color || '#000000'};
-        box-shadow:inset 0 8px 10px -2px ${props => props.color || '#000000'} ;
+        box-shadow:inset 0px 0px 33px 1px  ${props => props.color || '#000000'} ;
     }
 `;
 
@@ -51,9 +62,20 @@ const CategoriaVideos = ({ categoria, color, videos }) => {
             <TituloCategoria color={color}>{categoria}</TituloCategoria>
             <VideosContainer>
                 {videos.map(video => (
-                    <VideoItem key={video.id} color={color}>
+                    <VideoItem key={video.id} color={color} style={{background:"#000000"}}>
                         <img src={video.photo} alt={video.title} style={{width: '100%'}} />
-                        <h3>{video.title}</h3>
+                        <ContenedorEditVideo>
+                            <div style={{display:"flex" , gap:"4px"}}>
+                                <MdDeleteForever style={{width:"40px" , height:"50px"}}/>
+                                <p style={{width:"40px"}}>  BORRAR </p>
+                            </div>
+                                
+                            <div style={{display:"flex", gap:"4px" }}>
+                                <MdEdit style={{width:"35px" , height:"45px"}} />
+                                <p style={{width:"40px"}}>  EDITAR </p>
+                            </div>
+                            
+                        </ContenedorEditVideo>
                     </VideoItem>
                 ))}
             </VideosContainer>

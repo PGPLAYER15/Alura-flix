@@ -38,7 +38,7 @@ const BtnContainer = styled.div`
     gap: 20px;
 `
 
-const Header = () =>{
+const Header = (props) =>{
 
     const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ const Header = () =>{
 
 
     return(
-        <HeaderStyle>
+        <HeaderStyle style={{background:`${props.fondo}`}}>
             <img src="./img/LogoMain.svg" alt="Logo Main" />
             <BtnContainer>
                 <BtnInicioNuevoVideo onClick={()=>{irAHome()}}> Home </BtnInicioNuevoVideo>

@@ -10,7 +10,7 @@ const BannerContainer = styled.div`
     const BannerImg = styled.div`
         position:relative;
         background-image: linear-gradient(rgba(0, 18, 51, 0.5), rgba(0, 18, 51, 0.5)) ,url(${BannerFondo});
-        box-shadow:inset 0 8px 10px -4px #2271D1 ;
+        box-shadow:inset 0px 10px 13px -5px #2271D1 ; 
         border-top: 1px #2271D1 solid;
         background-repeat: no-repeat;
         background-size: cover;

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import Normalize from "../Components/Normalize";
-import Banner from "../Components/Banner/Banner";
 import Header from "../Components/Header";
+import Footer from "../Components/FooterPage";
 
 const FondoColor = styled.div`
     background-color: #040910;
@@ -31,6 +31,7 @@ const Formulario = () => {
                 <FondoColor>
                     <Header/>
                     <ContainerForm/>
+                    <Footer/>
                 </FondoColor>
         </>
         

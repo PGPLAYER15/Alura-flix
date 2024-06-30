@@ -4,13 +4,24 @@ import Normalize from '../Components/Normalize';
 import Banner from '../Components/Banner/Banner';
 import Categoria from '../Components/Categorias/categoria';
 import CategoriaVideos from '../Components/CategoriaVIdeos/CategoriaVIdeos';
-import { useState,useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
+import Footer from '../Components/FooterPage';
 
 
 const Fondo = styled.div`
-  background-color: #262626;
+  background-color: #191919;
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
+
+const ContenedorCategorias = styled.div`
+  width:100%;
+  height:auto;
+  min-height: min-content; 
+  padding:0px 0 70px 0;
+  background-color: #191919;
 `
 
 const Home = () => {
@@ -33,16 +44,20 @@ const Home = () => {
     <>
       <Normalize />
       <Fondo>
-        <Header/>
+        <Header fondo={"#262626"}/>
         <Banner/>
-        {categorias.map(categoria => (
-          <CategoriaVideos
-            key={categoria.nombre}
-            categoria={categoria.nombre}
-            color={categoria.color}
-            videos={videos.filter(video => video.category === categoria.nombre)}
-          />
-        ))}
+        <ContenedorCategorias>
+          {categorias.map(categoria => (
+            <CategoriaVideos
+              key={categoria.nombre}
+              categoria={categoria.nombre}
+              color={categoria.color}
+              videos={videos.filter(video => video.category === categoria.nombre)}
+            />
+          ))}
+        </ContenedorCategorias>
+        <Footer/>
+        
       </Fondo>
     </>
   );

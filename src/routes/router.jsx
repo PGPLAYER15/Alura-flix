@@ -29,3 +29,5 @@ const routes = ()=>{
         </RouterContainer>
     </BrowserRouter>
 }
+
+export default routes
