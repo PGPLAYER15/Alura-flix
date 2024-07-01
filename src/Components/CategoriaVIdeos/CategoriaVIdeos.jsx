@@ -58,9 +58,19 @@ const VideoItem = styled.div`
     }
 `;
 
-const CategoriaVideos = ({ categoria, color, videos }) => {
+const CategoriaVideos = ({ categoria, color, videos, onVideoEdit }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedVideo, setSelectedVideo] = useState(null);
 
-    const [isModalOpen , SetisModalOpen] = useState(false);
+    const handleEditClick = (video) => {
+        setSelectedVideo(video);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedVideo(null);
+    };
 
     return (
         <ContainerCategorias>
@@ -75,16 +85,20 @@ const CategoriaVideos = ({ categoria, color, videos }) => {
                                 <p style={{width:"40px"}}>  BORRAR </p>
                             </button>
                                 
-                            <button onClick={()=> SetisModalOpen(true)} style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"} }>
+                            <button onClick={() => handleEditClick(video)} style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"} }>
                                 <MdEdit style={{width:"35px" , height:"45px"}} />
                                 <p style={{width:"40px"}}>  EDITAR </p>
                             </button>
-                            
                         </ContenedorEditVideo>
                     </VideoItem>
                 ))}
-                <ModalZoom isOpen ={isModalOpen} closeModal={()=> SetisModalOpen(false)}/>
             </VideosContainer>
+            <ModalZoom 
+                isOpen={isModalOpen} 
+                closeModal={handleCloseModal}
+                video={selectedVideo}
+                onVideoUpdate={onVideoEdit}
+            />
         </ContainerCategorias>
     )
 }

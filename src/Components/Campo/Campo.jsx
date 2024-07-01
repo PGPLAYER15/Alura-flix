@@ -1,36 +1,40 @@
 import styled from "styled-components"
 
 const Labelestilizado = styled.label`
-    color:white;
+    color: white;
+    font-size: 20px;
+`
+const ContainerContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 `
 
+const InputEstilizado = styled.input`
+    background: none;
+    border: 2px solid #2271D1;
+    width: 573px;
+    border-radius: 10px;
+    padding: 0px 10px;
+    color: white;
+`
 
-const CampoTexto =  (props)=>{
-    
+const CampoTexto = (props) => {
     const placeholderModificado = `${props.placeholder}...`
-
-    //Destructuracion
-
-    const {type = "text" } = props
-
-    
-
-    const manejarCambio  = (e)=> {
-        
-        props.ActualizarValor(e.target.value)
-    }
+    const { type = "text" } = props
 
     return (
-    <div className = {`campo campo-${type}`} >
-            <Labelestilizado>{props.titulo} </Labelestilizado>
-            <input 
-            placeholder= {placeholderModificado} 
-            required={props.required} 
-            value={props.valor}
-            type= {type}
-        /> 
-        
-    </div>
+        <ContainerContent>
+            <Labelestilizado>{props.titulo}</Labelestilizado>
+            <InputEstilizado 
+                style={{ height: `${props.tamaño}` }}
+                placeholder={placeholderModificado} 
+                required={props.required} 
+                value={props.valor}
+                onChange={props.onChange}
+                type={type}
+            /> 
+        </ContainerContent>
     )
 }
 
