@@ -1,5 +1,7 @@
 import styled from "styled-components"
+import { useState } from "react";
 import { MdDeleteForever ,MdEdit} from "react-icons/md";
+import ModalZoom from "../Modalzoom/modalzoom";
 
 const ContainerCategorias = styled.div`
     display: flex;
@@ -57,6 +59,9 @@ const VideoItem = styled.div`
 `;
 
 const CategoriaVideos = ({ categoria, color, videos }) => {
+
+    const [isModalOpen , SetisModalOpen] = useState(false);
+
     return (
         <ContainerCategorias>
             <TituloCategoria color={color}>{categoria}</TituloCategoria>
@@ -65,19 +70,20 @@ const CategoriaVideos = ({ categoria, color, videos }) => {
                     <VideoItem key={video.id} color={color} style={{background:"#000000"}}>
                         <img src={video.photo} alt={video.title} style={{width: '100%'}} />
                         <ContenedorEditVideo>
-                            <div style={{display:"flex" , gap:"4px"}}>
+                            <button style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"}}>
                                 <MdDeleteForever style={{width:"40px" , height:"50px"}}/>
                                 <p style={{width:"40px"}}>  BORRAR </p>
-                            </div>
+                            </button>
                                 
-                            <div style={{display:"flex", gap:"4px" }}>
+                            <button onClick={()=> SetisModalOpen(true)} style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"} }>
                                 <MdEdit style={{width:"35px" , height:"45px"}} />
                                 <p style={{width:"40px"}}>  EDITAR </p>
-                            </div>
+                            </button>
                             
                         </ContenedorEditVideo>
                     </VideoItem>
                 ))}
+                <ModalZoom isOpen ={isModalOpen} closeModal={()=> SetisModalOpen(false)}/>
             </VideosContainer>
         </ContainerCategorias>
     )

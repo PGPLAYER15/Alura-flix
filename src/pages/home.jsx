@@ -6,6 +6,7 @@ import Categoria from '../Components/Categorias/categoria';
 import CategoriaVideos from '../Components/CategoriaVIdeos/CategoriaVIdeos';
 import React, { useState,useEffect } from 'react';
 import Footer from '../Components/FooterPage';
+import ModalZoom from '../Components/Modalzoom/modalzoom';
 
 
 const Fondo = styled.div`
@@ -40,7 +41,11 @@ const Home = () => {
       .catch(error => console.error('Error:', error));
   }, []);
 
+  
+
   return (
+
+
     <>
       <Normalize />
       <Fondo>
@@ -57,6 +62,7 @@ const Home = () => {
           ))}
         </ContenedorCategorias>
         <Footer/>
+        
         
       </Fondo>
     </>
