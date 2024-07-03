@@ -30,7 +30,7 @@ const Home = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/videos')
+    fetch('http://localhost:3000/videos')
       .then(response => response.json())
       .then(data => {
         setVideos(data);
@@ -40,10 +40,33 @@ const Home = () => {
       .catch(error => console.error('Error:', error));
   }, []);
 
+  //Funcion Para editar los videos
+
   const handleVideoUpdate = (updatedVideo) => {
     setVideos(videos.map(video => 
         video.id === updatedVideo.id ? updatedVideo : video
     ));
+  };
+
+
+  // Funcion Para borrar videos 
+
+  const handleVideoDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/videos/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete video');
+      }
+
+      // Actualizar el estado eliminando el video
+      setVideos(prevVideos => prevVideos.filter(video => video.id !== id));
+      console.log('Video deleted successfully');
+    } catch (error) {
+      console.error('Error deleting video:', error);
+    }
   };
 
   return (
@@ -60,6 +83,7 @@ const Home = () => {
               color={categoria.color}
               videos={videos.filter(video => video.category === categoria.nombre)}
               onVideoEdit={handleVideoUpdate}
+              onVideoDelete={handleVideoDelete}
             />
           ))}
         </ContenedorCategorias>

@@ -58,7 +58,7 @@ const VideoItem = styled.div`
     }
 `;
 
-const CategoriaVideos = ({ categoria, color, videos, onVideoEdit }) => {
+const CategoriaVideos = ({ categoria, color, videos, onVideoEdit,onVideoDelete }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedVideo, setSelectedVideo] = useState(null);
 
@@ -72,6 +72,12 @@ const CategoriaVideos = ({ categoria, color, videos, onVideoEdit }) => {
         setSelectedVideo(null);
     };
 
+    const handleDeleteClick = (id) => {
+        if (window.confirm('¿Estás seguro de que quieres eliminar este video?')) {
+            onVideoDelete(id);
+        }
+    };
+
     return (
         <ContainerCategorias>
             <TituloCategoria color={color}>{categoria}</TituloCategoria>
@@ -80,7 +86,7 @@ const CategoriaVideos = ({ categoria, color, videos, onVideoEdit }) => {
                     <VideoItem key={video.id} color={color} style={{background:"#000000"}}>
                         <img src={video.photo} alt={video.title} style={{width: '100%'}} />
                         <ContenedorEditVideo>
-                            <button style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"}}>
+                            <button onClick={()=> handleDeleteClick(video.id)} style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"}}>
                                 <MdDeleteForever style={{width:"40px" , height:"50px"}}/>
                                 <p style={{width:"40px"}}>  BORRAR </p>
                             </button>

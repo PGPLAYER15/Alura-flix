@@ -114,7 +114,7 @@ const ModalZoom = ({ isOpen, closeModal, video, onVideoUpdate }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:3001/videos/${video.id}`, {
+      const response = await fetch(`http://localhost:3000/videos/${video.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
