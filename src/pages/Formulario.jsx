@@ -39,10 +39,29 @@ const CrearCardParrafo = styled.p`
     position:relative;
     /* left:20px; */
 `
-const ContainerForm = styled.div`
+const ContainerForm = styled.form`
     margin: 90px 188px;
 `
 
+const InputEstilizado = styled.input`
+    width:470px;
+    height:60px;
+    border: 2px solid #262626;
+    background-color:#191919;
+    border-radius: 12px;
+`
+
+const ContenedorInputs = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:20px;
+    color:white;
+
+    label{
+        display:inline-flex;
+    }
+`
 
 const Formulario = () => {
     useEffect(() => {
@@ -61,6 +80,32 @@ const Formulario = () => {
 
                     <ContainerForm>
                         <CrearCardParrafo> Crear Card </CrearCardParrafo>
+
+                        <div>
+
+                            <ContenedorInputs>
+                                <div>
+                                    <label>Titulo</label>
+                                    <InputEstilizado type="text"></InputEstilizado>
+
+                                    <label>Categoria</label>
+                                    <InputEstilizado type="text"></InputEstilizado>
+                                </div>
+                                <div>
+                                    <label>Imagen</label>
+                                    <InputEstilizado type="text"></InputEstilizado>
+
+                                    <label>Video</label>
+                                    <InputEstilizado type="text"></InputEstilizado>
+                                </div>
+                                
+                            </ContenedorInputs>
+                            
+
+                            <label htmlFor=""></label>
+                            <textarea name="" id=""></textarea>
+                        </div>
+
                     </ContainerForm>
                     
                     </Container>
