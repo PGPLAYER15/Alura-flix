@@ -75,6 +75,7 @@ const InputGroup = styled.div`
 
     label {
         margin-bottom: 5px;
+        font-size:20px ; 
     }
 
     textarea {
@@ -85,6 +86,7 @@ const InputGroup = styled.div`
         border-radius: 12px;
         color: white;
         padding: 10px;
+        resize:none;
 
         
 
@@ -98,6 +100,25 @@ const InputGroup = styled.div`
 
     }
 `
+const BtnEnviarLimpiar = styled.button`
+    width: 180.13px;
+    height: 54px;
+    background:none;
+    border-radius:10px;
+    border: 2px solid white;
+    color:white;
+    font-size:20px;
+    cursor: pointer;
+    transition: border 0.5s ease-out; /* transición para el efecto de hover */
+
+    
+    &:hover{
+        border: 2px solid #2271D1;
+        
+    }
+
+`
+
 
 const SelectEstilizado = styled.select`
     width: 100%;
@@ -135,11 +156,18 @@ const Formulario = () => {
     const [formData, setFormData] = useState({
         title: "",
         category: "",
+        categoryColor: "",
         photo: "",
         link: "",
         description: ""
     });
 
+    const categoryColors = {
+        "BACK END": "#00C86F",
+        "FRONT END": "#6BD1FF",
+        "INNOVACIÓN Y GESTIÓN": "#FFBA05"
+    };
+        
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
@@ -150,9 +178,12 @@ const Formulario = () => {
         const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: value,
+            // Asignar el color correspondiente a la categoría cuando se selecciona
+            categoryColor: name === "category" ? categoryColors[value] : prevState.categoryColor
         }));
     };
+    
 
     const validateForm = () => {
         let newErrors = {};
@@ -169,6 +200,9 @@ const Formulario = () => {
         e.preventDefault();
         if (validateForm()) {
             try {
+                // Asignar el color correspondiente a la categoría seleccionada
+                formData.categoryColor = categoryColors[formData.category] || "";
+    
                 const response = await fetch('http://localhost:3000/videos', {
                     method: 'POST',
                     headers: {
@@ -176,18 +210,19 @@ const Formulario = () => {
                     },
                     body: JSON.stringify(formData),
                 });
-
+    
                 if (!response.ok) {
                     throw new Error('Failed to create video');
                 }
-
+    
                 const result = await response.json();
                 console.log('Nuevo video creado:', result);
-                
+    
                 // Limpiar el formulario después de un envío exitoso
                 setFormData({
                     title: "",
                     category: "",
+                    categoryColor: "",
                     photo: "",
                     link: "",
                     description: ""
@@ -200,6 +235,7 @@ const Formulario = () => {
             console.log('Formulario inválido');
         }
     };
+    
 
     return (
         <>
@@ -281,7 +317,12 @@ const Formulario = () => {
                                 />
                             </InputGroup>
                         </ContenedorInputs>
-                        <button type="submit">Crear Video</button>
+                        <div style={{display:"flex",marginTop:"40px" ,gap:"20px"}}>
+                            <BtnEnviarLimpiar type="submit">Crear Video</BtnEnviarLimpiar>
+                            <BtnEnviarLimpiar type="reset"> Limpiar </BtnEnviarLimpiar>
+
+                        </div>
+                        
                     </ContainerForm>
                 </Container>
                 <Footer/>

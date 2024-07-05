@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const HeaderStyle = styled.header`
     display: flex;
-    padding: 30px 0 20px 30px;
+    padding: 30px 20px 20px 30px;
     color: white;
     justify-content: space-between;
 `
