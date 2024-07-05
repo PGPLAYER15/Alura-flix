@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import BannerFondo from "../../../public/img/BannerFondo.svg"
+import CardPlayer from "../../../public/img/Cardplayer.svg"
 
 const BannerContainer = styled.div`
         position:relative;
@@ -94,7 +95,7 @@ const Banner = ()=>{
                         
                         </InfoCard>
                         <BannerCard>
-                                <ImgCard src="../../../public/img/Cardplayer.svg" alt="hola" /> 
+                                <ImgCard src={`${CardPlayer}`} alt="hola" /> 
                         </BannerCard>
                             
                         
