@@ -3,6 +3,8 @@ import styled from "styled-components";
 import CampoTexto from "../Campo/Campo";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
+
+
 const Overlay = styled.div`
   background-color: rgba(9, 21, 51, 0.69);
   position: fixed;
@@ -10,82 +12,79 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
+`;
 
-`
 const DialogEstilizado = styled.dialog`
-    display:flex;
-    justify-content:center;
-    align-items:start;
-    flex-direction:row;
-    gap:20px;
-    color:white;
-    position: absolute;
-    top: 794px;
-    background: #03122F;
-    padding: 0;
-    border: 4px solid #6BD1FF;
-    border-radius: 19px;
-    width: 974px;
-    height:1140px;
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: row;
+  gap: 20px;
+  color: white;
+  position: absolute;
+  top: 794px;
+  background: #03122f;
+  padding: 0;
+  border: 4px solid #6bd1ff;
+  border-radius: 19px;
+  width: 974px;
+  height: 1140px;
 
   form {
     padding: 40px;
   }
 
-  h2{
-    font-size:60px;
-    color:#2271D1;
+  h2 {
+    font-size: 60px;
+    color: #2271d1;
   }
 `;
 
 const CampoContainer = styled.div`
-    display:flex;
-    flex-direction:column;
-    gap:50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+`;
 
-`
 const ContenedorBtn = styled.div`
-  display:flex;
-  margin:40px;
-  justify-content:space-between;
+  display: flex;
+  margin: 40px;
+  justify-content: space-between;
+`;
 
-`
 const BtnSumitReset = styled.button`
   display: flex;
-      width: 180px;
-      height: 54px;
-      color: white;
-      background:none;
-      border:2px #F5F5F5 solid;
-      border-radius: 10px;
-      cursor:pointer;
-      font-size:22px;
-      align-items: center;
-      justify-content: center;
-      transition: background,box-shadow,color,border 0.5s ease-out; /* transición para el efecto de hover */
+  width: 180px;
+  height: 54px;
+  color: white;
+  background: none;
+  border: 2px #f5f5f5 solid;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  transition: background, box-shadow, color, border 0.5s ease-out;
 
-      &:hover{
-          box-shadow: inset 0 0 11px 3px #2271D1; /* sombra azul interna */
-          background: black;
-          color: #2271D1;
-          border:2px #2271D1 solid;
-      }
-`
-  
-
+  &:hover {
+    box-shadow: inset 0 0 11px 3px #2271d1;
+    background: black;
+    color: #2271d1;
+    border: 2px #2271d1 solid;
+  }
+`;
 
 const BtnCerrarModal = styled.button`
-  position:relative;
-  left:650px;
-  background:none;
-  color:white;
-  border:none;
-  width:43.33px;
+  position: relative;
+  left: 650px;
+  background: none;
+  color: white;
+  border: none;
+  width: 43.33px;
   height: 43.33px;
-  cursor:pointer;
-`
+  cursor: pointer;
+`;
+
 const ModalZoom = ({ isOpen, closeModal, video, onVideoUpdate }) => {
   const [titulo, setTitulo] = useState("");
   const [imagen, setImagen] = useState("");
@@ -110,11 +109,11 @@ const ModalZoom = ({ isOpen, closeModal, video, onVideoUpdate }) => {
       title: titulo,
       photo: imagen,
       link: videoUrl,
-      description: descripcion
+      description: descripcion,
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/videos/${video.id}`, {
+      const response = await fetch(`https://my-json-server.typicode.com/PGPLAYER15/alura-flix-api/videos/${video.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -140,9 +139,9 @@ const ModalZoom = ({ isOpen, closeModal, video, onVideoUpdate }) => {
       <DialogEstilizado>
         <form onSubmit={handleSubmit}>
           <BtnCerrarModal onClick={closeModal}>
-            <AiOutlineCloseCircle style={{width:"43.33px", height:"43.33px", cursor:"pointer"}} />
+            <AiOutlineCloseCircle style={{ width: "43.33px", height: "43.33px", cursor: "pointer" }} />
           </BtnCerrarModal>
-          
+
           <h2>EDITAR CARD:</h2>
 
           <CampoContainer>
@@ -179,7 +178,7 @@ const ModalZoom = ({ isOpen, closeModal, video, onVideoUpdate }) => {
               tamaño={"112px"}
             />
           </CampoContainer>
-          
+
           <ContenedorBtn>
             <BtnSumitReset type="submit">Guardar</BtnSumitReset>
             <BtnSumitReset type="reset">Limpiar</BtnSumitReset>
