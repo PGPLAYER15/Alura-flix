@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { MdDeleteForever, MdEdit } from "react-icons/md";
+import styled from "styled-components"
+import { useState } from "react";
+import { MdDeleteForever ,MdEdit} from "react-icons/md";
 import ModalZoom from "../Modalzoom/modalzoom";
+
 const ContainerCategorias = styled.div`
     display: flex;
     flex-direction: column;
@@ -57,17 +58,11 @@ const VideoItem = styled.div`
     }
 `;
 
-const CategoriaVideos = ({ categoria, color, videos, onVideoEdit, onVideoDelete }) => {
+const CategoriaVideos = ({ categoria, color, videos, onVideoEdit,onVideoDelete }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedVideo, setSelectedVideo] = useState(null);
 
-    useEffect(() => {
-        console.log(`CategoriaVideos renderizado para ${categoria}`);
-        console.log('Videos recibidos:', videos);
-    }, [categoria, videos]);
-
     const handleEditClick = (video) => {
-        console.log('Edit clicked for video:', video);
         setSelectedVideo(video);
         setIsModalOpen(true);
     };
@@ -78,7 +73,6 @@ const CategoriaVideos = ({ categoria, color, videos, onVideoEdit, onVideoDelete 
     };
 
     const handleDeleteClick = (id) => {
-        console.log('Delete clicked for video id:', id);
         if (window.confirm('¿Estás seguro de que quieres eliminar este video?')) {
             onVideoDelete(id);
         }
@@ -88,26 +82,22 @@ const CategoriaVideos = ({ categoria, color, videos, onVideoEdit, onVideoDelete 
         <ContainerCategorias>
             <TituloCategoria color={color}>{categoria}</TituloCategoria>
             <VideosContainer>
-                {videos.length === 0 ? (
-                    <p>No hay videos en esta categoría.</p>
-                ) : (
-                    videos.map(video => (
-                        <VideoItem key={video.id} color={color} style={{background:"#000000"}}>
-                            <img src={video.photo} alt={video.title} style={{width: '100%'}} />
-                            <ContenedorEditVideo>
-                                <button onClick={() => handleDeleteClick(video.id)} style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"}}>
-                                    <MdDeleteForever style={{width:"40px" , height:"50px"}}/>
-                                    <p style={{width:"40px"}}>  BORRAR </p>
-                                </button>
-                                    
-                                <button onClick={() => handleEditClick(video)} style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"} }>
-                                    <MdEdit style={{width:"35px" , height:"45px"}} />
-                                    <p style={{width:"40px"}}>  EDITAR </p>
-                                </button>
-                            </ContenedorEditVideo>
-                        </VideoItem>
-                    ))
-                )}
+                {videos.map(video => (
+                    <VideoItem key={video.id} color={color} style={{background:"#000000"}}>
+                        <img src={video.photo} alt={video.title} style={{width: '100%'}} />
+                        <ContenedorEditVideo>
+                            <button onClick={()=> handleDeleteClick(video.id)} style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"}}>
+                                <MdDeleteForever style={{width:"40px" , height:"50px"}}/>
+                                <p style={{width:"40px"}}>  BORRAR </p>
+                            </button>
+                                
+                            <button onClick={() => handleEditClick(video)} style={{display:"flex", gap:"4px",background:"none", color:"white",border:"none" ,cursor:"pointer"} }>
+                                <MdEdit style={{width:"35px" , height:"45px"}} />
+                                <p style={{width:"40px"}}>  EDITAR </p>
+                            </button>
+                        </ContenedorEditVideo>
+                    </VideoItem>
+                ))}
             </VideosContainer>
             <ModalZoom 
                 isOpen={isModalOpen} 
