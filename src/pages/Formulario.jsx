@@ -140,97 +140,74 @@ const categories = [
   { value: "INNOVACIÓN Y GESTIÓN", label: "Innovación y gestión" },
 ];
 
-const Formulario = () => {
-    const { addVideo } = useVideo();
-    const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("Componente Formulario renderizado");
-  }, []);
+const Formulario = () => {
+  const { addVideo } = useVideo();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    title: "",
-    category: "",
-    categoryColor: "",
-    photo: "",
-    link: "",
-    description: "",
+      title: "",
+      category: "",
+      categoryColor: "",
+      photo: "",
+      link: "",
+      description: "",
   });
-
-  const categoryColors = {
-    "BACK END": "#00C86F",
-    "FRONT END": "#6BD1FF",
-    "INNOVACIÓN Y GESTIÓN": "#FFBA05",
-  };
 
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    console.log("Componente Formulario renderizado");
-  }, []);
+  const categoryColors = {
+      "BACK END": "#00C86F",
+      "FRONT END": "#6BD1FF",
+      "INNOVACIÓN Y GESTIÓN": "#FFBA05",
+  };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-      categoryColor: name === "category" ? categoryColors[value] : prevState.categoryColor,
-    }));
+      const { name, value } = e.target;
+      setFormData((prevState) => ({
+          ...prevState,
+          [name]: value,
+          categoryColor: name === "category" ? categoryColors[value] : prevState.categoryColor,
+      }));
   };
 
   const validateForm = () => {
-    let newErrors = {};
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
-        newErrors[key] = true;
-      }
-    });
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+      let newErrors = {};
+      Object.keys(formData).forEach((key) => {
+          if (!formData[key]) {
+              newErrors[key] = true;
+          }
+      });
+      setErrors(newErrors);
+      return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-        try {
-            formData.categoryColor = categoryColors[formData.category] || "";
-
-            const response = await fetch('https://my-json-server.typicode.com/PGPLAYER15/alura-flix-api/videos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to create video');
-            }
-
-            const result = await response.json();
-            console.log('Nuevo video creado:', result);
-
-            addVideo(result);
-
-            setFormData({
-                title: "",
-                category: "",
-                categoryColor: "",
-                photo: "",
-                link: "",
-                description: ""
-            });
-            setErrors({});
-            
-            // Navegar de regreso a la página principal
-            navigate('/');
-        } catch (error) {
-            console.error('Error creating video:', error);
-        }
+      try {
+        formData.categoryColor = categoryColors[formData.category] || "";
+        const nuevoVideo = await addVideo(formData);
+        console.log('Nuevo video creado:', nuevoVideo);
+        
+        setFormData({
+          title: "",
+          category: "",
+          categoryColor: "",
+          photo: "",
+          link: "",
+          description: ""
+        });
+        setErrors({});
+        
+        navigate('/');
+      } catch (error) {
+        console.error('Error al crear el video:', error);
+      }
     } else {
-        console.log('Formulario inválido');
+      console.log('Formulario inválido');
     }
-};
+  };
 
   return (
     <>
