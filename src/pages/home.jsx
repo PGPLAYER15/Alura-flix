@@ -23,33 +23,19 @@ const ContenedorCategorias = styled.div`
   background-color: #191919;
 `
 
-const Home = () => {
-  const [videos, setVideos] = useState([]);
+const Home = ({ videos, updateVideo, deleteVideo }) => {
   const [categorias, setCategorias] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
-    fetch('https://my-json-server.typicode.com/PGPLAYER15/alura-flix-api/videos')
-      .then(response => response.json())
-      .then(data => {
-        setVideos(data);
-        const uniqueCategories = [...new Set(data.map(video => JSON.stringify({nombre: video.category, color: video.categoryColor})))];
-        setCategorias(uniqueCategories.map(cat => JSON.parse(cat)));
-      })
-      .catch(error => console.error('Error:', error));
-  }, []);
-
-  //Funcion Para editar los videos
+    const uniqueCategories = [...new Set(videos.map(video => JSON.stringify({nombre: video.category, color: video.categoryColor})))];
+    setCategorias(uniqueCategories.map(cat => JSON.parse(cat)));
+  }, [videos]);
 
   const handleVideoUpdate = (updatedVideo) => {
-    setVideos(videos.map(video => 
-        video.id === updatedVideo.id ? updatedVideo : video
-    ));
+    updateVideo(updatedVideo);
   };
-
-
-  // Funcion Para borrar videos 
 
   const handleVideoDelete = async (id) => {
     try {
@@ -58,14 +44,13 @@ const Home = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete video');
+        throw new Error('Error al eliminar el video');
       }
 
-      // Actualizar el estado eliminando el video
-      setVideos(prevVideos => prevVideos.filter(video => video.id !== id));
-      console.log('Video deleted successfully');
+      deleteVideo(id);
+      console.log('Video eliminado con éxito');
     } catch (error) {
-      console.error('Error deleting video:', error);
+      console.error('Error al eliminar el video:', error);
     }
   };
 
@@ -100,3 +85,4 @@ const Home = () => {
 }
 
 export default Home;
+

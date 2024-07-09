@@ -1,8 +1,9 @@
-import { useEffect,useState } from "react";
-import styled from "styled-components";
-import Normalize from "../Components/Normalize";
-import Header from "../Components/Header";
-import Footer from "../Components/FooterPage";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Normalize from '../Components/Normalize';
+import Header from '../Components/Header';
+import Footer from '../Components/FooterPage';
 
 const FondoColor = styled.div`
     background-color: #191919;
@@ -141,7 +142,9 @@ const SelectEstilizado = styled.select`
     }
 `;
 
-const Formulario = () => {
+const Formulario = ({addVideo}) => {
+
+    const navigate = useNavigate();
 
     const categories = [
         { value: "BACK END", label: "Back-end" },
@@ -189,44 +192,37 @@ const Formulario = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (validateForm()) {
-            try {
-                // Asignar el color correspondiente a la categoría seleccionada
-                formData.categoryColor = categoryColors[formData.category] || "";
-    
-                const response = await fetch('https://my-json-server.typicode.com/PGPLAYER15/alura-flix-api/videos', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-    
-                if (!response.ok) {
-                    throw new Error('Failed to create video');
-                }
-    
-                const result = await response.json();
-                console.log('Nuevo video creado:', result);
-    
-                // Limpiar el formulario después de un envío exitoso
-                setFormData({
-                    title: "",
-                    category: "",
-                    categoryColor: "",
-                    photo: "",
-                    link: "",
-                    description: ""
-                });
-                setErrors({});
-            } catch (error) {
-                console.error('Error creating video:', error);
-            }
-        } else {
-            console.log('Formulario inválido');
-        }
-    };
+      e.preventDefault();
+      if (validateForm()) {
+          try {
+              formData.categoryColor = categoryColors[formData.category] || "";
+  
+              const response = await fetch('https://my-json-server.typicode.com/PGPLAYER15/alura-flix-api/videos', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(formData),
+              });
+
+              if (!response.ok) {
+                  throw new Error('Error al crear el video');
+              }
+  
+              const result = await response.json();
+              console.log('Nuevo video creado:', result);
+  
+              addVideo(result);  // Añade el nuevo video al estado de la aplicación
+              
+              // Navega a la página de inicio después de una creación exitosa
+              navigate('/');
+          } catch (error) {
+              console.error('Error al crear el video:', error);
+          }
+      } else {
+          console.log('Formulario inválido');
+      }
+  };
     
 
     return (
